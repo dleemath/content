@@ -46,7 +46,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 6.10.0
     isoverridable: false
-    itemVersion: 1.2.3
+    itemVersion: 1.3.17
     packID: AggregatedScripts
     packName: Aggregated Scripts
     packPropagationLabels:
@@ -54,7 +54,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.12.11.4417419
+dockerimage: demisto/python3:3.12.12.6391686
 engineinfo: {}
 mainengineinfo: {}
 name: get-endpoint-data
@@ -91,8 +91,8 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('get-endpoint-data', 'start', __line__())
-  CONSTANT_PACK_VERSION = '1.2.3'
-  demisto.debug('pack id = AggregatedScripts, pack version = 1.2.3')
+  CONSTANT_PACK_VERSION = '1.3.17'
+  demisto.debug('pack id = AggregatedScripts, pack version = 1.3.17')
   from collections.abc import Callable
   from itertools import zip_longest
   from typing import Any
@@ -350,10 +350,13 @@ script: |
           entry_context, human_readable, readable_errors = self.get_command_results(command.name, raw_outputs, args)
 
           if not entry_context:
-              endpoints = get_endpoint_not_found(command, readable_errors[0].readable_output or "", [], endpoint_args)
+              # Note: In some cases, entry_context and readable_errors may be empty lists.
+              hr = readable_errors[0].readable_output if readable_errors and readable_errors[0].readable_output else ""
+              endpoints = get_endpoint_not_found(command, hr, [], endpoint_args)
               return readable_errors, endpoints
+          hr = human_readable[0].readable_output if human_readable and human_readable[0].readable_output else ""
           endpoints = entry_context_to_endpoints(command, entry_context, self.add_additional_fields)
-          endpoints.extend(get_endpoint_not_found(command, human_readable[0].readable_output or "", endpoints, endpoint_args))
+          endpoints.extend(get_endpoint_not_found(command, hr, endpoints, endpoint_args))
 
           if command.post_processing:
               demisto.debug(f"command with post processing: {command.name}")
@@ -411,7 +414,7 @@ script: |
 
           Args:
               command (Command): An instance of MappedCommand that contains the command information.
-              results (Dict[str, Any]): A dictionary containing the command results.
+              results (List[Dict[str, Any]]): A list of dictionaries containing the command results.
               args (Dict[str, Any]): A dictionary containing the specific arguments for the command.
 
           Returns:
