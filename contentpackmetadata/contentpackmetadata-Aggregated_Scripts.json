@@ -1,0 +1,201 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"automation"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "This script isolates endpoints using multiple integrations and returns a success or failure message.",
+				"fromversion": "6.10.0",
+				"id": "isolate-endpoint",
+				"name": "isolate-endpoint",
+				"tags": []
+			},
+			{
+				"description": "This script enriches Domains data with information from multiple integrations and returns a \"DomainEnrichment\" object with consolidated information in the context output.",
+				"fromversion": "6.10.0",
+				"id": "domain-enrichment",
+				"name": "domain-enrichment",
+				"tags": [
+					"basescript"
+				]
+			},
+			{
+				"description": "This script executes the 'quarantine-file' command on a specified file via the appropriate agent. This script is used to isolate files identified as suspicious. Currently supported brands are \"Cortex XDR - IR\", \"Cortex Core - IR\", and \"Microsoft Defender Advanced Threat Protection\".",
+				"fromversion": "6.10.0",
+				"id": "quarantine-file",
+				"name": "quarantine-file",
+				"tags": []
+			},
+			{
+				"description": "This script gathers file reputation data from multiple integrations and returns a \"FileEnrichment\" object with consolidated information to the context output.",
+				"fromversion": "6.10.0",
+				"id": "file-enrichment",
+				"name": "file-enrichment",
+				"tags": []
+			},
+			{
+				"description": "This script gathers user data from multiple integrations and returns an Account entity with consolidated information to the context.",
+				"fromversion": "6.10.0",
+				"id": "get-user-data",
+				"name": "get-user-data",
+				"tags": []
+			},
+			{
+				"description": "This script gathers endpoint data from multiple integrations and returns an endpoint entity with consolidated information to the context.",
+				"fromversion": "6.10.0",
+				"id": "get-endpoint-data",
+				"name": "get-endpoint-data",
+				"tags": []
+			},
+			{
+				"description": "This script gathers URL reputation data from multiple integrations and returns a \"URLEnrichment\" object with consolidated information in the context output.",
+				"fromversion": "6.10.0",
+				"id": "url-enrichment",
+				"name": "url-enrichment",
+				"tags": [
+					"basescript"
+				]
+			},
+			{
+				"description": "The script blocks a list of IP addresses in supported integrations.",
+				"fromversion": "6.1.0",
+				"id": "block-external-ip",
+				"name": "block-external-ip",
+				"tags": []
+			},
+			{
+				"description": "This script disables users for multiple services.",
+				"fromversion": "6.10.0",
+				"id": "disable-user",
+				"name": "disable-user",
+				"tags": []
+			},
+			{
+				"description": "This script clears user sessions across multiple integrations for a list of usernames.",
+				"fromversion": "6.10.0",
+				"id": "clear-user-session",
+				"name": "clear-user-session",
+				"tags": []
+			},
+			{
+				"description": "This script gathers IP reputation data from multiple integrations and returns an IP entity with consolidated information in the context.",
+				"fromversion": "6.10.0",
+				"id": "ip-enrichment",
+				"name": "ip-enrichment",
+				"tags": [
+					"basescript"
+				]
+			}
+		],
+		"casefield": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"created": "2025-06-18T20:38:25Z",
+	"currentVersion": "1.2.3",
+	"defaultDataSource": {
+		"id": "",
+		"name": ""
+	},
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.41.30",
+			"name": "Base"
+		},
+		"Palo_Alto_Networks_WildFire": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "2.1.63",
+			"name": "WildFire by Palo Alto Networks"
+		}
+	},
+	"deprecated": false,
+	"description": "A pack containing all aggregated scripts.",
+	"downloads": 360,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"firstCreated": "0001-01-01T00:00:00Z",
+	"fromServerVersion": "6.1.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"hybrid": false,
+	"id": "AggregatedScripts",
+	"installMessage": "",
+	"integrations": [
+		{
+			"id": "",
+			"imagePath": "content/packs/Palo_Alto_Networks_WildFire/WildFire-Reports_image.png",
+			"name": "Palo Alto Networks WildFire Reports"
+		},
+		{
+			"id": "",
+			"imagePath": "content/packs/Palo_Alto_Networks_WildFire/WildFire-v2_image.png",
+			"name": "Palo Alto Networks WildFire v2"
+		}
+	],
+	"isOverridable": false,
+	"itemVersion": "1.2.3",
+	"keywords": [],
+	"legacy": true,
+	"modules": [],
+	"name": "Aggregated Scripts",
+	"packID": "AggregatedScripts",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "The Aggregated Scripts pack contains scripts that execute multiple commands, significantly streamlining playbook creation and execution.\n\n#### What does this pack do?\n\n- File indicator enrichment using an array file hashes.\n",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.1.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Core"
+	],
+	"toServerVersion": "",
+	"updated": "2025-10-17T10:27:34Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "5528947",
+	"videos": []
+}
