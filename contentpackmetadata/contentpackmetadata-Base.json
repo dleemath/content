@@ -14,31 +14,29 @@
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Pre-process text data for the machine learning text classifier.",
-				"fromversion": "5.0.0",
-				"id": "DBotPreProcessTextData",
-				"name": "DBotPreProcessTextData",
+				"description": "Gets a list of indicator objects and the associated indicator outputs that match the specified query and filters. The results are returned in a structured data file.",
+				"fromversion": "5.5.0",
+				"id": "GetIndicatorsByQuery",
+				"name": "GetIndicatorsByQuery",
 				"tags": [
 					"ml"
 				]
 			},
 			{
-				"description": "Deprecated. Use DBotFindSimilarIncidents instead.\nFind similar incidents by text comparison - the algorithm based on TF-IDF method.\nTo read more about this method: https://en.wikipedia.org/wiki/Tf%E2%80%93idf\n\nThis automation runs using the default Limited User role, unless you explicitly\nchange the permissions.\nFor more information, see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n- For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script",
+				"description": "Deprecated. Use DBotPreProcessTextData instead.",
 				"fromversion": "5.0.0",
-				"id": "FindSimilarIncidentsByText",
-				"name": "FindSimilarIncidentsByText",
+				"id": "WordTokenizerNLP",
+				"name": "WordTokenizerNLP",
 				"tags": [
-					"ml",
-					"dedup",
-					"duplicate",
-					"incidents"
+					"phishing",
+					"ml"
 				]
 			},
 			{
 				"description": "Common code that will be merged into each server script when it runs.",
-				"fromversion": "5.0.0",
-				"id": "CommonServerPython",
-				"name": "CommonServerPython",
+				"fromversion": "6.11.0",
+				"id": "CommonServer",
+				"name": "CommonServer",
 				"tags": [
 					"infra",
 					"server"
@@ -54,22 +52,12 @@
 				]
 			},
 			{
-				"description": "Predict text label using a pre-trained machine learning phishing model, and get the most important words used in the classification decision.",
-				"fromversion": "5.0.0",
-				"id": "DBotPredictPhishingWords",
-				"name": "DBotPredictPhishingWords",
-				"tags": [
-					"ml",
-					"phishing"
-				]
-			},
-			{
-				"description": "Show clustering model information - model summary and incidents in specific cluster.",
+				"description": "This automation allows to delete a relationship between indicator objects based on the relationship id.",
 				"fromversion": "6.2.0",
-				"id": "DBotShowClusteringModelInfo",
-				"name": "DBotShowClusteringModelInfo",
+				"id": "DeleteIndicatorRelationships",
+				"name": "DeleteIndicatorRelationships",
 				"tags": [
-					"widget"
+					"basescript"
 				]
 			},
 			{
@@ -82,31 +70,97 @@
 				]
 			},
 			{
+				"description": "Deprecated. Use DBotFindSimilarIncidents instead.\nFind similar incidents by text comparison - the algorithm based on TF-IDF method.\nTo read more about this method: https://en.wikipedia.org/wiki/Tf%E2%80%93idf\n\nThis automation runs using the default Limited User role, unless you explicitly\nchange the permissions.\nFor more information, see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n- For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script",
+				"fromversion": "5.0.0",
+				"id": "FindSimilarIncidentsByText",
+				"name": "FindSimilarIncidentsByText",
+				"tags": [
+					"ml",
+					"dedup",
+					"duplicate",
+					"incidents"
+				]
+			},
+			{
+				"description": "Highlight words inside a given text.",
+				"fromversion": "5.0.0",
+				"id": "HighlightWords",
+				"name": "HighlightWords",
+				"tags": []
+			},
+			{
+				"description": "Pre-process text data for the machine learning text classifier.",
+				"fromversion": "5.0.0",
+				"id": "DBotPreProcessTextData",
+				"name": "DBotPreProcessTextData",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Deprecated. No available replacement. Suggests a classifier mapping based on an advanced name matching algorithm.",
+				"fromversion": "5.0.0",
+				"id": "DBotSuggestClassifierMapping",
+				"name": "DBotSuggestClassifierMapping",
+				"tags": [
+					"ml"
+				]
+			},
+			{
 				"description": "Common code that will be merged into each server script when it runs.",
-				"fromversion": "6.11.0",
-				"id": "CommonServer",
-				"name": "CommonServer",
+				"fromversion": "5.0.0",
+				"id": "CommonServerPython",
+				"name": "CommonServerPython",
 				"tags": [
 					"infra",
 					"server"
 				]
 			},
 			{
-				"description": "Gets a list of incident objects and the associated incident outputs that\nmatch the specified query and filters. The results are returned in a structured data file.\n\nThis automation runs using the default Limited User role, unless you explicitly change the permissions.\nFor more information, see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n- For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script",
-				"fromversion": "5.0.0",
-				"id": "GetIncidentsByQuery",
-				"name": "GetIncidentsByQuery",
+				"description": "This script helps organizes and groups incidents based on their similarities using clustering algorithms.\nClustering is a technique used to group data points (in this case, incidents) that are similar to each other into clusters.\nUsed to automatically categorize a large number of incidents into meaningful groups.\n",
+				"fromversion": "6.2.0",
+				"id": "DBotTrainClustering",
+				"name": "DBotTrainClustering",
 				"tags": [
 					"ml"
 				]
 			},
 			{
-				"description": "This automation allows to delete a relationship between indicator objects based on the relationship id.",
-				"fromversion": "6.2.0",
-				"id": "DeleteIndicatorRelationships",
-				"name": "DeleteIndicatorRelationships",
+				"description": "Runs validation and linting using the Demisto SDK on content items, such as integrations, automations and content packs. This automation script is used as part of the content validation that runs as part of the contribution flow.",
+				"fromversion": "5.5.0",
+				"id": "ValidateContent",
+				"name": "ValidateContent",
+				"tags": []
+			},
+			{
+				"description": "Predict text label using a pre-trained machine learning phishing model, and get the most important words used in the classification decision.",
+				"fromversion": "5.0.0",
+				"id": "DBotPredictPhishingWords",
+				"name": "DBotPredictPhishingWords",
 				"tags": [
-					"basescript"
+					"ml",
+					"phishing"
+				]
+			},
+			{
+				"description": "Parse STIX files to Cortex XSOAR indicators by clicking the **Upload STIX File** button.",
+				"fromversion": "5.0.0",
+				"id": "StixParser",
+				"name": "StixParser",
+				"tags": [
+					"stix",
+					"ioc"
+				]
+			},
+			{
+				"description": "Parse Sane-json-reports and export them as pdf files (used internally).",
+				"fromversion": "5.5.0",
+				"id": "SanePdfReports",
+				"name": "SanePdfReports",
+				"tags": [
+					"sane-pdf-reports",
+					"sane-reports",
+					"pdf"
 				]
 			},
 			{
@@ -114,15 +168,6 @@
 				"fromversion": "5.0.0",
 				"id": "GetMLModelEvaluation",
 				"name": "GetMLModelEvaluation",
-				"tags": [
-					"ml"
-				]
-			},
-			{
-				"description": "Create a phishing classifier using machine learning technique, based on email content.",
-				"fromversion": "5.0.0",
-				"id": "DBotBuildPhishingClassifier",
-				"name": "DBotBuildPhishingClassifier",
 				"tags": [
 					"ml"
 				]
@@ -145,11 +190,22 @@
 				"tags": []
 			},
 			{
-				"description": "Highlight words inside a given text.",
+				"description": "Create a phishing classifier using machine learning technique, based on email content.",
 				"fromversion": "5.0.0",
-				"id": "HighlightWords",
-				"name": "HighlightWords",
-				"tags": []
+				"id": "DBotBuildPhishingClassifier",
+				"name": "DBotBuildPhishingClassifier",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Show clustering model information - model summary and incidents in specific cluster.",
+				"fromversion": "6.2.0",
+				"id": "DBotShowClusteringModelInfo",
+				"name": "DBotShowClusteringModelInfo",
+				"tags": [
+					"widget"
+				]
 			},
 			{
 				"description": "Finds similar incidents based on indicators' similarity. Indicators' contribution to the final score is based on their scarcity.",
@@ -159,38 +215,10 @@
 				"tags": []
 			},
 			{
-				"description": "Check if a docker image is available for performing docker pull. Script simulates the docker pull flow but doesn't actually pull the image. Returns an entry with 'ok' if all is good otherwise will return an error.",
+				"description": "Train a machine learning text classifier.",
 				"fromversion": "5.0.0",
-				"id": "CheckDockerImageAvailable",
-				"name": "CheckDockerImageAvailable",
-				"tags": []
-			},
-			{
-				"description": "Deprecated. Use DBotPreProcessTextData instead.",
-				"fromversion": "5.0.0",
-				"id": "WordTokenizerNLP",
-				"name": "WordTokenizerNLP",
-				"tags": [
-					"phishing",
-					"ml"
-				]
-			},
-			{
-				"description": "Parse Sane-json-reports and export them as pdf files (used internally).",
-				"fromversion": "5.5.0",
-				"id": "SanePdfReports",
-				"name": "SanePdfReports",
-				"tags": [
-					"sane-pdf-reports",
-					"sane-reports",
-					"pdf"
-				]
-			},
-			{
-				"description": "This script helps organizes and groups incidents based on their similarities using clustering algorithms.\nClustering is a technique used to group data points (in this case, incidents) that are similar to each other into clusters.\nUsed to automatically categorize a large number of incidents into meaningful groups.\n",
-				"fromversion": "6.2.0",
-				"id": "DBotTrainClustering",
-				"name": "DBotTrainClustering",
+				"id": "DBotTrainTextClassifierV2",
+				"name": "DBotTrainTextClassifierV2",
 				"tags": [
 					"ml"
 				]
@@ -207,15 +235,6 @@
 				]
 			},
 			{
-				"description": "Deprecated. No available replacement. Suggests a classifier mapping based on an advanced name matching algorithm.",
-				"fromversion": "5.0.0",
-				"id": "DBotSuggestClassifierMapping",
-				"name": "DBotSuggestClassifierMapping",
-				"tags": [
-					"ml"
-				]
-			},
-			{
 				"description": "Draw incidents and indicators on the canvas to map and visualize their connections.",
 				"fromversion": "6.1.0",
 				"id": "DrawRelatedIncidentsCanvas",
@@ -223,39 +242,11 @@
 				"tags": []
 			},
 			{
-				"description": "Runs validation and linting using the Demisto SDK on content items, such as integrations, automations and content packs. This automation script is used as part of the content validation that runs as part of the contribution flow.",
-				"fromversion": "5.5.0",
-				"id": "ValidateContent",
-				"name": "ValidateContent",
+				"description": "Check if a docker image is available for performing docker pull. Script simulates the docker pull flow but doesn't actually pull the image. Returns an entry with 'ok' if all is good otherwise will return an error.",
+				"fromversion": "5.0.0",
+				"id": "CheckDockerImageAvailable",
+				"name": "CheckDockerImageAvailable",
 				"tags": []
-			},
-			{
-				"description": "Train a machine learning text classifier.",
-				"fromversion": "5.0.0",
-				"id": "DBotTrainTextClassifierV2",
-				"name": "DBotTrainTextClassifierV2",
-				"tags": [
-					"ml"
-				]
-			},
-			{
-				"description": "Parse STIX files to Cortex XSOAR indicators by clicking the **Upload STIX File** button.",
-				"fromversion": "5.0.0",
-				"id": "StixParser",
-				"name": "StixParser",
-				"tags": [
-					"stix",
-					"ioc"
-				]
-			},
-			{
-				"description": "Gets a list of indicator objects and the associated indicator outputs that match the specified query and filters. The results are returned in a structured data file.",
-				"fromversion": "5.5.0",
-				"id": "GetIndicatorsByQuery",
-				"name": "GetIndicatorsByQuery",
-				"tags": [
-					"ml"
-				]
 			},
 			{
 				"description": "This automation creates a relationship between indicator objects.",
@@ -264,6 +255,15 @@
 				"name": "CreateIndicatorRelationship",
 				"tags": [
 					"basescript"
+				]
+			},
+			{
+				"description": "Gets a list of incident objects and the associated incident outputs that\nmatch the specified query and filters. The results are returned in a structured data file.\n\nThis automation runs using the default Limited User role, unless you explicitly change the permissions.\nFor more information, see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n- For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script",
+				"fromversion": "5.0.0",
+				"id": "GetIncidentsByQuery",
+				"name": "GetIncidentsByQuery",
+				"tags": [
+					"ml"
 				]
 			}
 		],
@@ -289,18 +289,26 @@
 		"wizard": null
 	},
 	"created": "2020-08-02T11:28:20Z",
-	"currentVersion": "1.41.30",
+	"currentVersion": "1.41.53",
 	"defaultDataSource": {
 		"id": "",
 		"name": ""
 	},
 	"definitionId": "",
-	"dependencies": {},
+	"dependencies": {
+		"AggregatedScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.3.17",
+			"name": "Aggregated Scripts"
+		}
+	},
 	"deprecated": false,
 	"description": "The base pack for Cortex XSOAR.",
-	"downloads": 200413,
+	"downloads": 204591,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
-	"firstCreated": "0001-01-01T00:00:00Z",
+	"firstCreated": "2020-08-02T11:28:20Z",
 	"fromServerVersion": "6.0.0",
 	"general": [
 		"generalFieldCertified",
@@ -313,7 +321,7 @@
 	"installMessage": "",
 	"integrations": [],
 	"isOverridable": false,
-	"itemVersion": "1.41.30",
+	"itemVersion": "1.41.53",
 	"keywords": [
 		"base",
 		"common"
@@ -345,9 +353,9 @@
 		"Core"
 	],
 	"toServerVersion": "",
-	"updated": "2025-10-21T20:32:18Z",
+	"updated": "2026-01-07T17:58:46Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "5528947",
+	"versionInfo": "6597147",
 	"videos": []
 }
