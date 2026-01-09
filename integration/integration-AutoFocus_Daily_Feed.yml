@@ -1,0 +1,386 @@
+category: Data Enrichment & Threat Intelligence
+commonfields:
+  id: AutoFocus Daily Feed
+  version: -1
+configuration:
+- defaultvalue: "true"
+  display: Fetch indicators
+  name: feed
+  required: false
+  type: 8
+- additionalinfo: TIM customers that upgraded to version 6.2 or above, can have this
+    value pre-configured in their main account so no additional input is needed. To
+    use this feature, upgrade your license so it includes the license key.
+  display: API Key
+  name: api_key
+  required: false
+  type: 4
+- additionalinfo: Indicators from this integration instance will be marked with this
+    reputation
+  defaultvalue: Bad
+  display: Indicator Reputation
+  name: feedReputation
+  options:
+  - None
+  - Good
+  - Suspicious
+  - Bad
+  required: false
+  type: 18
+- additionalinfo: Reliability of the source providing the intelligence data
+  defaultvalue: A - Completely reliable
+  display: Source Reliability
+  name: feedReliability
+  options:
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: true
+  type: 15
+- additionalinfo: The Traffic Light Protocol (TLP) designation to apply to indicators
+    fetched from the feed
+  display: Traffic Light Protocol Color
+  name: tlp_color
+  options:
+  - RED
+  - AMBER
+  - GREEN
+  - WHITE
+  required: false
+  type: 15
+- defaultvalue: indicatorType
+  display: ""
+  name: feedExpirationPolicy
+  options:
+  - never
+  - interval
+  - indicatorType
+  - suddenDeath
+  required: false
+  type: 17
+- defaultvalue: "20160"
+  display: ""
+  name: feedExpirationInterval
+  required: false
+  type: 1
+- additionalinfo: Incremental feeds pull only new or modified indicators that have
+    been sent from the integration. As the determination if the indicator is new or
+    modified happens on the 3rd-party vendor's side, and only indicators that are
+    new or modified are sent to Cortex XSOAR, all indicators coming from these feeds
+    are labeled new or modified.
+  defaultvalue: "true"
+  display: Incremental Feed
+  hidden: true
+  name: feedIncremental
+  required: false
+  type: 8
+- defaultvalue: "240"
+  display: Feed Fetch Interval
+  name: feedFetchInterval
+  required: false
+  type: 19
+- additionalinfo: When selected, the exclusion list is ignored for indicators from
+    this feed. This means that if an indicator from this feed is on the exclusion
+    list, the indicator might still be added to the system.
+  display: Bypass exclusion list
+  name: feedBypassExclusionList
+  required: false
+  type: 8
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+- additionalinfo: Supports CSV values.
+  display: Tags
+  name: feedTags
+  required: false
+  type: 0
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.5.0
+    isoverridable: false
+    itemVersion: 2.3.0
+    packID: AutoFocus
+    packName: AutoFocus by Palo Alto Networks
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+deprecated: true
+description: Deprecated. No available replacement.
+detaileddescription: |-
+  ## AutoFocus Feed
+  Gets Daily Threat Feed from AutoFocus.
+
+  For more information see the [AutoFocus documentation](https://docs.paloaltonetworks.com/autofocus/autofocus-admin/autofocus-feeds.html).
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/auto-focus-daily-feed)
+display: AutoFocus Daily Feed (Deprecated)
+image: content/packs/AutoFocus/AutoFocusDailyFeed_image.png
+name: AutoFocus Daily Feed
+script:
+  commands:
+  - arguments:
+    - defaultValue: "10"
+      description: The maximum number of indicators to return. Default is 10.
+      name: limit
+    - defaultValue: "0"
+      description: The index of the first indicator to fetch.
+      name: offset
+    description: Gets indicators from AutoFocus.
+    name: autofocus-daily-get-indicators
+  dockerimage: demisto/python3:3.10.1.25933
+  feed: true
+  nativeimage:
+  - "8.8"
+  - "8.6"
+  runonce: false
+  script: |
+    register_module_line('AutoFocus Daily Feed', 'start', __line__())
+    CONSTANT_PACK_VERSION = '2.3.0'
+    demisto.debug('pack id = AutoFocus, pack version = 2.3.0')
+
+    # IMPORTS
+    from typing import List, Tuple, Optional
+    import urllib3
+
+
+    # Disable insecure warnings
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+    class Client(BaseClient):
+        """Client for AutoFocus Feed - gets indicator lists from Daily threat feeds
+
+        Attributes:
+            api_key(str): The API key for AutoFocus.
+            insecure(bool): Use SSH on http request.
+            proxy(str): Use system proxy.
+        """
+
+        def __init__(self, api_key, insecure):
+            self.api_key = api_key
+            self.verify = not insecure
+            handle_proxy()
+
+        def daily_http_request(self) -> list:
+            """The HTTP request for daily feeds.
+            Returns:
+                list. A list of indicators fetched from the feed.
+            """
+            headers = {
+                "apiKey": self.api_key,
+                'Content-Type': "application/json"
+            }
+
+            res = requests.request(
+                method="GET",
+                url='https://autofocus.paloaltonetworks.com/api/v1.0/output/threatFeedResult',
+                verify=self.verify,
+                headers=headers
+            )
+            res.raise_for_status()
+            indicator_list = res.text.split('\n')
+            return indicator_list
+
+        @staticmethod
+        def find_indicator_type(indicator: str) -> str:
+            """
+            Get the type of the indicator.
+
+            Args:
+                indicator (str): The indicator whose type we want to check.
+
+            Returns:
+                str: The type of the indicator.
+            """
+            if ip_type := FeedIndicatorType.ip_to_indicator_type(indicator):
+                return ip_type
+            elif re.match(urlRegex, indicator):
+                return FeedIndicatorType.URL
+
+            elif re.match(sha256Regex, indicator):
+                return FeedIndicatorType.File
+            else:
+                return FeedIndicatorType.Domain
+
+        def create_indicators_from_response(self, response: list, feed_tags: list, tlp_color: Optional[str]) -> list:
+            """
+            Creates a list of indicators from a given response
+            Args:
+                response: List of dict that represent the response from the api
+                feed_tags: The indicator tags
+                tlp_color: Traffic Light Protocol color
+
+            Returns:
+                List of indicators with the correct indicator type.
+            """
+            parsed_indicators = []  # type:List
+
+            for indicator in response:
+                if indicator:
+                    indicator_type = self.find_indicator_type(indicator)
+
+                    # catch ip of the form X.X.X.X:portNum and extract the IP without the port.
+                    if indicator_type in [FeedIndicatorType.IP, FeedIndicatorType.CIDR,
+                                          FeedIndicatorType.IPv6CIDR, FeedIndicatorType.IPv6] and ":" in indicator:
+                        indicator = indicator.split(":", 1)[0]
+
+                    indicator_obj = {
+                        "type": indicator_type,
+                        "value": indicator,
+                        "rawJSON": {
+                            'value': indicator,
+                            'type': indicator_type,
+                            'service': 'Daily Threat Feed'
+                        },
+                        'fields': {'service': 'Daily Threat Feed', 'tags': feed_tags}
+                    }
+                    if tlp_color:
+                        indicator_obj['fields']['trafficlightprotocol'] = tlp_color
+
+                    parsed_indicators.append(indicator_obj)
+
+            return parsed_indicators
+
+        def build_iterator(self, feed_tags: List, tlp_color: Optional[str], limit=None, offset=None):
+            """Builds a list of indicators.
+            Returns:
+                list. A list of JSON objects representing indicators fetched from a feed.
+            """
+            response = self.daily_http_request()
+            parsed_indicators = self.create_indicators_from_response(response, feed_tags,
+                                                                     tlp_color)  # list of dict of indicators
+
+            # for get_indicator_command only
+            if limit:
+                parsed_indicators = parsed_indicators[int(offset): int(offset) + int(limit)]
+            return parsed_indicators
+
+
+    def module_test_command(client: Client, args: dict, feed_tags: list, tlp_color: Optional[str]):
+        """
+        Returning 'ok' indicates that the integration works like it is supposed to. Connection to the service is successful.
+
+        Args:
+            client(Client): Autofocus Feed client
+            args(Dict): The instance parameters
+            feed_tags: The indicator tags
+            tlp_color: Traffic Light Protocol color
+
+        Returns:
+            'ok' if test passed, anything else will fail the test.
+        """
+        try:
+            client.build_iterator(argToList(demisto.params().get('feedTags')), tlp_color, 1, 0)
+        except Exception:
+            raise Exception("Could not fetch Daily Threat Feed\n"
+                            "\nCheck your API key and your connection to AutoFocus.")
+        return 'ok', {}, {}
+
+
+    def get_indicators_command(client: Client, args: dict, feed_tags: list, tlp_color: Optional[str]) \
+            -> Tuple[str, dict, list]:
+        """Initiate a single fetch-indicators
+
+        Args:
+            client(Client): The AutoFocus Client.
+            args(dict): Command arguments.
+            feed_tags: The indicator tags.
+            tlp_color: Traffic Light Protocol color.
+        Returns:
+            str, dict, list. the markdown table, context JSON and list of indicators
+        """
+        offset = int(args.get('offset', 0))
+        limit = int(args.get('limit', 100))
+
+        indicators = fetch_indicators_command(client, feed_tags, tlp_color, limit, offset)
+
+        hr_indicators = []
+        for indicator in indicators:
+            hr_indicators.append({
+                'Value': indicator.get('value'),
+                'Type': indicator.get('type'),
+                'rawJSON': indicator.get('rawJSON'),
+                'fields': indicator.get('fields'),
+            })
+
+        human_readable = tableToMarkdown("Indicators from AutoFocus:", hr_indicators,
+                                         headers=['Value', 'Type', 'rawJSON', 'fields'], removeNull=True)
+
+        if args.get('limit'):
+            human_readable = human_readable + f"\nTo bring the next batch of indicators " \
+                                              f"run:\n!autofocus-daily-get-indicators " \
+                                              f"limit={args.get('limit')} " \
+                                              f"offset={int(str(args.get('limit'))) + int(str(args.get('offset')))}"
+
+        return human_readable, {}, indicators
+
+
+    def fetch_indicators_command(client: Client, feed_tags: List, tlp_color: Optional[str], limit=None, offset=None) \
+            -> list:
+        """Fetch-indicators command from AutoFocus Feeds
+
+        Args:
+            client(Client): AutoFocus Feed client.
+            feed_tags: The indicator tags.
+            tlp_color: Traffic Light Protocol color.
+            limit: limit the amount of indicators fetched.
+            offset: the index of the first index to fetch.
+
+        Returns:
+            list. List of indicators.
+        """
+        indicators = client.build_iterator(feed_tags, tlp_color, limit, offset)
+
+        return indicators
+
+
+    def main():
+        params = demisto.params()
+        feed_tags = argToList(params.get('feedTags'))
+        tlp_color = params.get('tlp_color')
+
+        command = demisto.command()
+        demisto.info(f'Command being called is {command}')
+
+        commands = {
+            'test-module': module_test_command,
+            'autofocus-daily-get-indicators': get_indicators_command
+        }
+        try:
+            auto_focus_key_retriever = AutoFocusKeyRetriever(params.get('api_key'))
+            client = Client(api_key=auto_focus_key_retriever.key,
+                            insecure=params.get('insecure'))
+
+            if demisto.command() == 'fetch-indicators':
+                indicators = fetch_indicators_command(client, feed_tags, tlp_color)
+                # we submit the indicators in batches
+                for b in batch(indicators, batch_size=2000):
+                    demisto.createIndicators(b)
+            else:
+                readable_output, outputs, raw_response = commands[command](client, demisto.args(),
+                                                                           feed_tags, tlp_color)  # type: ignore
+                return_outputs(readable_output, outputs, raw_response)
+        except Exception as e:
+            raise Exception(f'Error in AutoFocusFeed Daily Integration [{e}]')
+
+
+    if __name__ == '__builtin__' or __name__ == 'builtins':
+        main()
+
+    register_module_line('AutoFocus Daily Feed', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
