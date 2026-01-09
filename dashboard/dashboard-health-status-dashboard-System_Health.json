@@ -9,7 +9,7 @@
 	"id": "health-status-dashboard",
 	"isCommon": true,
 	"isOverridable": false,
-	"itemVersion": "1.41.30",
+	"itemVersion": "1.41.53",
 	"layout": [
 		{
 			"forceRange": false,
