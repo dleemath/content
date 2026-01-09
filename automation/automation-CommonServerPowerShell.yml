@@ -8,7 +8,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 5.5.0
     isoverridable: false
-    itemVersion: 1.41.30
+    itemVersion: 1.41.53
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -16,7 +16,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/powershell:7.4.6.117357
+dockerimage: demisto/powershell:7.5.0.3759715
 engineinfo: {}
 mainengineinfo: {}
 name: CommonServerPowerShell
@@ -24,7 +24,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  ### pack version: 1.41.30
+  ### pack version: 1.41.53
 
 
   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidGlobalVars", "", Scope = "", Justification = "Use of globals set by the Demisto Server")]
