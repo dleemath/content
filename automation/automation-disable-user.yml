@@ -41,7 +41,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 6.10.0
     isoverridable: false
-    itemVersion: 1.2.3
+    itemVersion: 1.3.17
     packID: AggregatedScripts
     packName: Aggregated Scripts
     packPropagationLabels:
@@ -49,7 +49,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.12.11.4508456
+dockerimage: demisto/python3:3.12.12.5490952
 engineinfo: {}
 mainengineinfo: {}
 name: disable-user
@@ -87,8 +87,8 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('disable-user', 'start', __line__())
-  CONSTANT_PACK_VERSION = '1.2.3'
-  demisto.debug('pack id = AggregatedScripts, pack version = 1.2.3')
+  CONSTANT_PACK_VERSION = '1.3.17'
+  demisto.debug('pack id = AggregatedScripts, pack version = 1.3.17')
 
 
 
@@ -233,7 +233,7 @@ script: |
       res_cmd, hr = run_command("okta-suspend-user", {"username": user["Username"], "using": using})
       func_res = []
       for res in res_cmd:
-          res_msg = res["Contents"]
+          res_msg = res["HumanReadable"] or res["Contents"]
           if res_msg == f"### {user['Username']} status is Suspended":
               dur = DisabledUserResult(Disabled=True, Result="Success", Message="User successfully disabled")
           elif "Cannot suspend a user that is not active" in res_msg:
