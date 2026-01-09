@@ -1,0 +1,574 @@
+category: Data Enrichment & Threat Intelligence
+commonfields:
+  id: Autofocus
+  version: -1
+configuration:
+- defaultvalue: https://autofocus.paloaltonetworks.com/
+  display: Server URL
+  name: server
+  required: true
+  type: 0
+- defaultvalue: v1.0
+  display: Version
+  name: version
+  required: true
+  type: 0
+- display: API Key
+  name: apiKey
+  required: true
+  type: 4
+- defaultvalue: "true"
+  display: Use system proxy settings
+  name: useproxy
+  required: false
+  type: 8
+- defaultvalue: "false"
+  display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.3.0
+    packID: AutoFocus
+    packName: AutoFocus by Palo Alto Networks
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+deprecated: true
+description: Deprecated. Use the Palo Alto Networks AutoFocus v2 integration instead.
+  Palo Alto Networks AutoFocus enables you to distinguish the most important threats
+  from everyday commodity attacks.
+detaileddescription: |-
+  Step 1: Login and add your authorization code
+  1. Visit [PAN support](https://support.paloaltonetworks.com).
+  2. Select the Assets > Site Licenses tab.
+  3. Select Add Site License.
+  4. Enter the authorization code.
+  Step 2: Activate the API.
+  1. Select the Enable action in Site Licenses.
+  2. Select the API Key link.
+
+  The API key appears onscreen as shown below. Use this API
+  key for all AutoFocus API requests
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/autofocus)
+display: Palo Alto AutoFocus (Deprecated)
+image: content/packs/AutoFocus/Autofocus_image.png
+name: Autofocus
+script:
+  commands:
+  - arguments:
+    - auto: PREDEFINED
+      defaultValue: public
+      description: The scope for the search
+      name: scope
+      predefined:
+      - private
+      - public
+      - global
+    - defaultValue: "50"
+      description: Number of results
+      name: size
+    - defaultValue: "0"
+      description: Sample number to start from
+      name: from
+    - auto: PREDEFINED
+      description: Sort field
+      name: sort
+      predefined:
+      - app_name
+      - app_packagename
+      - filetype
+      - size
+      - finish_date
+      - create_date
+      - update_date
+      - md5
+      - sha1
+      - sha256
+      - ssdeep
+    - auto: PREDEFINED
+      description: Order of sort
+      name: order
+      predefined:
+      - asc
+      - desc
+    - description: The query to retrieve samples
+      name: query
+      required: true
+    - defaultValue: "3"
+      description: Time to sleep between checking for results
+      name: sleep
+    - defaultValue: "10"
+      description: Number of checks before giving up on the query
+      name: checks
+    - description: The af_cookie for retrieving previous search results
+      name: cookie
+    description: Search for samples on Autofocus
+    name: autofocus-search-samples
+    outputs:
+    - contextPath: Autofocus.Cookie
+      description: The cookie for the results
+      type: string
+    - contextPath: Autofocus.Samples.id
+      description: ID of sample
+      type: string
+    - contextPath: Autofocus.Samples.md5
+      description: MD5 of the sample
+      type: string
+    - contextPath: Autofocus.Samples.sha1
+      description: SHA1 of the sample
+      type: string
+    - contextPath: Autofocus.Samples.sha256
+      description: SHA256 of the sample
+      type: string
+    - contextPath: Autofocus.Samples.app_name
+      description: Application name (if exists)
+      type: string
+    - contextPath: Autofocus.Samples.size
+      description: The size of the sample
+      type: number
+    - contextPath: Autofocus.Samples.ssdeep
+      description: SSDeep of the sample
+      type: string
+    - contextPath: Autofocus.Samples.create_date
+      description: The create date for the sample
+      type: string
+    - contextPath: Autofocus.Samples.finish_date
+      description: The finish date for the sample
+      type: string
+    - contextPath: Autofocus.Samples.malware
+      description: A flag (0/1) if this is malware
+      type: string
+    - contextPath: Autofocus.Samples.app_packagename
+      description: The sample package name (if exists)
+      type: string
+    - contextPath: Autofocus.Samples.filetype
+      description: The sample type
+      type: string
+    - contextPath: Autofocus.Samples.region
+      description: Where have we seen this sample
+      type: number
+    - contextPath: Autofocus.Samples.tag
+      description: Sample tags
+      type: string
+  - arguments:
+    - defaultValue: "50"
+      description: Number of results
+      name: size
+    - defaultValue: "0"
+      description: Sample number to start from
+      name: from
+    - auto: PREDEFINED
+      description: Sort field
+      name: sort
+      predefined:
+      - app
+      - device_country
+      - device_countrycode
+      - device_hostname
+      - device_serial
+      - vsys
+      - dst_country
+      - dst_countrycode
+      - dst_ip
+      - dst_port
+      - emailsbjcharset
+      - device_industry
+      - src_country
+      - src_countrycode
+      - src_ip
+      - src_port
+      - sha256
+      - tstamp
+      - upload_src
+    - auto: PREDEFINED
+      description: Order of sort
+      name: order
+      predefined:
+      - asc
+      - desc
+    - description: The query to retrieve samples
+      name: query
+      required: true
+    - defaultValue: "3"
+      description: Time to sleep between checking for results
+      name: sleep
+    - defaultValue: "10"
+      description: Number of checks before giving up on the query
+      name: checks
+    - description: The af_cookie for retrieving previous search results
+      name: cookie
+    description: Search for sessions on Autofocus
+    name: autofocus-search-sessions
+    outputs:
+    - contextPath: Autofocus.Cookie
+      description: The cookie for the results
+      type: string
+    - contextPath: Autofocus.Sessions.id
+      description: ID of the session
+      type: string
+    - contextPath: Autofocus.Sessions.device_industry
+      description: Device industry
+      type: string
+    - contextPath: Autofocus.Sessions.filename
+      description: The name of the file
+      type: string
+    - contextPath: Autofocus.Sessions.region
+      description: Region for the session
+      type: string
+    - contextPath: Autofocus.Sessions.sha256
+      description: SHA256 of the file
+      type: string
+    - contextPath: Autofocus.Sessions.tstamp
+      description: Timestamp for session
+      type: string
+    - contextPath: Autofocus.Sessions.upload_src
+      description: Where did we get the file
+      type: string
+  - arguments:
+    - default: true
+      description: The session ID to retrieve details for
+      name: id
+      required: true
+    description: Get details of a specific session
+    name: autofocus-session
+    outputs:
+    - contextPath: Autofocus.Sessions.id
+      description: ID of the session
+      type: string
+    - contextPath: Autofocus.Sessions.device_industry
+      description: Device industry
+      type: string
+    - contextPath: Autofocus.Sessions.filename
+      description: The name of the file
+      type: string
+    - contextPath: Autofocus.Sessions.region
+      description: Region for the session
+      type: string
+    - contextPath: Autofocus.Sessions.sha256
+      description: SHA256 of the file
+      type: string
+    - contextPath: Autofocus.Sessions.tstamp
+      description: Timestamp for session
+      type: string
+    - contextPath: Autofocus.Sessions.upload_src
+      description: Where did we get the file
+      type: string
+  - arguments:
+    - default: true
+      description: The sample id
+      name: id
+      required: true
+    - auto: PREDEFINED
+      defaultValue: "true"
+      description: Should we display coverage
+      name: coverage
+      predefined:
+      - "true"
+      - "false"
+    - defaultValue: file
+      description: 'comma-separated list of sections to display: apk_app_icon, apk_app_name,
+        apk_cert_file, apk_certificate_id, apk_defined_activity, apk_defined_intent_filter,
+        apk_defined_receiver, apk_defined_sensor, apk_defined_service, apk_digital_signer,
+        apk_embedded_library, apk_embeded_url, apk_internal_file, apk_isrepackaged,
+        apk_packagename, apk_requested_permission, apk_sensitive_api_call, apk_suspicious_behavior,
+        apk_suspicious_file, apk_suspicious_pattern, apk_suspicious_action_monitored,
+        apk_suspicious_file, apk_suspicious_string, apk_version_num, behavior_type,
+        connection, coverage, dns, file, http, japi, mac_embedded_url, misc, mutex,
+        process, registry, service, user_agent'
+      name: sections
+    - description: 'comma-separated list of platforms: win7, winxp, android, staticAnalyzer,
+        mac'
+      name: platforms
+    description: Retrieve the sample analysis
+    name: autofocus-sample-analysis
+  - arguments:
+    - default: true
+      description: Hash of the file to query. Supports MD5, SHA1 and SHA256.
+      name: file
+      required: true
+    description: Check file reputation of the given hash
+    name: file
+    outputs:
+    - contextPath: File.MD5
+      description: File MD5 hash
+      type: string
+    - contextPath: File.SHA1
+      description: File SHA1 hash
+      type: string
+    - contextPath: File.SHA256
+      description: File SHA256 hash
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: For malicious files, the vendor that made the decision
+      type: string
+    - contextPath: File.Malicious.Description
+      description: For malicious files, the reason for the vendor to make the decision
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The indicator we tested
+      type: string
+    - contextPath: DBotScore.Type
+      description: The type of the indicator
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: Vendor used to calculate the Score
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score
+      type: number
+    - contextPath: DBotScore.Description
+      description: The reason for the score (if any)
+      type: string
+  runonce: false
+  script: |
+    // pack version: 2.3.0
+    var SERVER = params.server.replace(/[\/]+$/, '') + '/api/' + params.version + '/';
+
+    function doReq(path, data) {
+        data.apiKey = params.apiKey;
+        var result = http(
+            SERVER + path,
+            {
+                Headers: {'Content-Type': ['application/json'], 'Accept': ['application/json']},
+                Method: 'POST',
+                Body: JSON.stringify(data)
+            },
+            params.insecure,
+            params.useproxy
+        );
+
+        if (result.StatusCode < 200 || result.StatusCode > 299) {
+            if (result.StatusCode == 503) {
+                throw '503 - Rate limit exceeded. Contact your Autofocus representative.';
+            }
+            if (result.StatusCode == 409) {
+                throw '409 - Invalid message or missing parameters.';
+            }
+            else {
+                throw 'Failed to perform request ' + path + ', request status code: ' + result.StatusCode + '\n' + result.Body;
+            }
+        }
+        if (result.Body === '') {
+            throw 'No content received.';
+        }
+        var obj;
+        try {
+            obj = JSON.parse(result.Body);
+        } catch (ex) {
+            throw 'Error parsing reply - ' + result.Body + ' - ' + ex;
+        }
+        return {
+            body: result.Body,
+            obj: obj,
+            statusCode: result.StatusCode
+        };
+    }
+
+
+    function doSearch(prefix) {
+        var cookie = args.cookie;
+        if (!cookie) {
+            var q = {};
+            q.query = JSON.parse(args.query);
+            q.from = parseInt(args.from);
+            q.size = parseInt(args.size);
+            if (args.sort) {
+                q.sort = {};
+                q.sort[args.sort] = {order: (args.order ? args.order : 'asc')};
+            }
+            if (args.scope) {
+                q.scope = args.scope;
+            }
+            var res = doReq(prefix + '/search/', q);
+            if (!res.obj.af_cookie) {
+                throw 'Unable to retrieve cookie of search results';
+            }
+            cookie = res.obj.af_cookie;
+        }
+        var checks = (args.checks) ? parseInt(args.checks) : 10;
+        var sleep = (args.sleep) ? parseInt(args.sleep) : 3;
+        var res1;
+        var ec = {'Autofocus.Cookie': cookie};
+        while (checks > 0) {
+            checks--;
+            wait(sleep);
+            res1 = doReq(prefix + '/results/' + cookie, {});
+            if (res1.obj.af_message === 'complete' || res1.obj.af_in_progress === false ||
+                    (res1.obj.hits && res1.obj.hits.length >= parseInt(args.size))) {
+                var md = '## PAN Autofocus ' + prefix + ' result\n';
+                md += 'Total: ' + res1.obj.total + '\nTook: ' + res1.obj.took + '\n';
+                var hits = [];
+                for (var i=0; i<res1.obj.hits.length; i++) {
+                    var data = res1.obj.hits[i]._source;
+                    data.id = res1.obj.hits[i]._id;
+                    hits.push(data);
+                }
+                ec['Autofocus.S' + prefix.substr(1)] = hits;
+                md += tableToMarkdown('S' + prefix.substr(1), hits);
+                return {
+                    Type: entryTypes.note,
+                    Contents: res1.body,
+                    ContentsFormat: formats.json,
+                    HumanReadable: md,
+                    EntryContext: ec
+                };
+            }
+        }
+        return {
+            Type: entryTypes.note,
+            Contents: ec,
+            ContentsFormat: formats.json,
+            HumanReadable: 'PAN Autofocus timeout occured waiting for results, cookie is: ' + cookie,
+            EntryContext: ec
+        };
+    }
+
+
+    function doSession(id) {
+        var res = doReq('session/' + id, {});
+        if (res.obj.af_message === 'complete' || res.obj.af_in_progress === false || res.obj.hits.length >= 1) {
+            var hits = [];
+            for (var i=0; i<res.obj.hits.length; i++) {
+                var data = res.obj.hits[i]._source;
+                data.id = res.obj.hits[i]._id;
+                hits.push(data);
+            }
+            md = tableToMarkdown('PAN Autofocus session details', hits);
+            md += 'Took: ' + res.obj.took + '\n';
+            return {
+                Type: entryTypes.note,
+                Contents: res.body,
+                ContentsFormat: formats.json,
+                HumanReadable: md,
+                EntryContext: {'Autofocus.Sessions': hits}
+            };
+        }
+        return {
+            Type: entryTypes.note,
+            ContentsFormat: formats.markdown,
+            Contents: 'PAN Autofocus no session for: ' + id
+        };
+    }
+
+
+    function doSample() {
+        var p = {};
+        if (args.sections) {
+            p.sections = argToList(args.sections);
+        }
+        if (args.platforms) {
+            p.platforms = argToList(args.platforms);
+        }
+        if (args.coverage === 'true') {
+            p.coverage = true;
+            if (p.sections && p.sections.indexOf('coverage') < 0) {
+                p.sections.push('coverage');
+            }
+        }
+        var res = doReq('sample/' + args.id + '/analysis', p);
+        md = '## PAN Autofocus Sample Analysis\n';
+        md += '### Sections: ' + res.obj.sections.join(', ') + '\n';
+        md += '### Platforms: ' +  res.obj.platforms.join(', ') + '\n';
+        if (res.obj.coverage) {
+            Object.keys(res.obj.coverage).forEach(function(s) {
+                if (Object.keys(res.obj.coverage[s]).length) {
+                    md += tableToMarkdown('Coverage ' + s, res.obj.coverage[s]) + '\n';
+                }
+            });
+        }
+        res.obj.sections.forEach(function(s) {
+            if (s === 'coverage') {
+                return;
+            }
+            res.obj.platforms.forEach(function(p) {
+                if (res.obj[s][p]) {
+                    md += tableToMarkdown(s + ' - ' + p, res.obj[s][p]) + '\n';
+                }
+            });
+        });
+        return {
+            Type: entryTypes.note,
+            Contents: res.body,
+            ContentsFormat: formats.json,
+            HumanReadable: md
+        };
+    }
+
+    switch (command) {
+
+        case 'test-module':
+            doReq('samples/search/', {query: {operator: 'all', children: [{field: 'sample.malware', operator: 'is', value: 1}]}, size: 1, from: 0, scope: 'public'});
+            return 'ok';
+
+        case 'autofocus-search-samples':
+            return doSearch('samples');
+
+        case 'autofocus-search-sessions':
+            return doSearch('sessions');
+
+        case 'autofocus-session':
+            return doSession(args.id);
+
+        case 'autofocus-sample-analysis':
+            return doSample(args.id);
+
+        case 'file':
+            args.size = 1;
+            args.from = 0;
+            args.scope = 'public';
+            var hash = args.file.length === 64 ? 'sha256' : args.file.length === 40 ? 'sha1' : 'md5';
+            args.query = JSON.stringify({operator: 'all', children: [{field: 'sample.' + hash, operator: 'is', value: args.file}]});
+            var search = doSearch('samples');
+            if (search.EntryContext && search.EntryContext['Autofocus.Samples'] && search.EntryContext['Autofocus.Samples'].length > 0) {
+                var c = search.EntryContext['Autofocus.Samples'][0];
+                var dbotScore = [];
+                ['md5', 'sha1', 'sha256'].forEach(function(h) {
+                    if (c[h]) {
+                        dbotScore.push({Indicator: c[h], Type: 'hash', Vendor: 'PAN Autofocus', Score: c.malware === 1 ? 3 : 1,
+                            Description: c.tag && c.tag.length > 0 ? c.tag.join(', ') : c.malware === 1 ? 'Marked as malware' : ''});
+                    }
+                });
+                var ec = {DBotScore: dbotScore};
+                var f = {MD5: c.md5, SHA1: c.sha1, SHA256: c.sha256, Size: c.size, SSDeep: c.ssdeep, Region: c.region ? c.region.join(',') : '', Info: c.filetype, Type: c.filetype};
+                if (c.malware === 1) {
+                    f.properties_to_append = ['Malicious'];
+                    f.Malicious = {Vendor: 'PAN Autofocus', Description: dbotScore[0].Description};
+                }
+                ec[outputPaths.file] = f;
+                // Now, let's add any interesting sessions we've encountered to the display
+                args.size = 50;
+                delete args.scope;
+                args.query = JSON.stringify({operator: 'all', children: [{field: 'session.sha256', operator: 'is', value: c.sha256}]});
+                var md = search.HumanReadable;
+                var sessions = doSearch('sessions');
+                if (sessions.EntryContext && sessions.EntryContext['Autofocus.Sessions'] && sessions.EntryContext['Autofocus.Sessions'].length > 0) {
+                    md += '\n' + sessions.HumanReadable;
+                }
+                return {
+                    Type: entryTypes.note,
+                    Contents: search.Contents,
+                    ContentsFormat: formats.json,
+                    HumanReadable: md,
+                    EntryContext: ec
+                };
+            }
+            return {
+                Type: entryTypes.note,
+                ContentsFormat: formats.markdown,
+                Contents: 'PAN Autofocus no data for: ' + args.file
+            };
+
+        default:
+            throw 'Unknown command "' + command + '"';
+    }
+  type: javascript
+system: true
