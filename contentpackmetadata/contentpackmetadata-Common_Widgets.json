@@ -1,0 +1,1650 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"automation",
+		"widget"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Script Widget - RSS Feed.",
+				"fromversion": "5.5.0",
+				"id": "RSSWidget",
+				"name": "RSSWidget",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				],
+				"tags": [
+					"widget"
+				]
+			},
+			{
+				"description": "Returns a table widget of enabled feed integration instances that errors out on indicators fetch.",
+				"fromversion": "6.1.0",
+				"id": "FeedIntegrationErrorWidget",
+				"name": "FeedIntegrationErrorWidget",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				],
+				"tags": [
+					"widget"
+				]
+			},
+			{
+				"description": "A script that creates a table of all the ToDo tasks assigned to the current user.",
+				"fromversion": "6.1.0",
+				"id": "MyToDoTasksWidget",
+				"name": "MyToDoTasksWidget",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				],
+				"tags": [
+					"widget"
+				]
+			}
+		],
+		"casefield": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": [
+			{
+				"name": "Unassigned Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average runtime per Automation (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Malicious/Suspicious Indicators in Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Disk Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Workers per Engine",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Closed Incidents by Role",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Top executed Commands",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTR by Severity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Late Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Unassigned Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "My ToDo Tasks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Least executed Commands",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Elastic JVM Memory Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Server CPU Usage % (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Open Tasks Per User",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Late SLA by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTD by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Unit 42 Blog Feed",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average runtime per Playbook (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Return On Investment (ROI)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Top Users Closed Manual Tasks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Feed Integrations Errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average runtime for Playbooks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Incidents Assigned by User",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Failed Automation executions per Incident Types (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Unassigned Closed Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Feeds Errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Server Memory Usage % (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Mean Time to Containment",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Memory Usage % per Engine",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command executions errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Executions by status per Manual Tasks (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Indicators in Related Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Least executed Commands per Instance",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "CPU Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Malicious Indicators Activity by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Image",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents by Phase",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "My Tasks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average runtime by Instance per Command (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Remediation SLA by Status",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Executions by status per Automated Tasks (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Disk Usage % per Engine",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Investigation Activity Timeline",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTD by Severity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Tasks By State",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Manual Command execution errors (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Failed Manual Tasks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Most Active Investigations",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Unassigned Active Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Commands executed",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incident Severity by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command execution errors per Instance",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Indicators Activity by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Latest Messages",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average Incident Duration by Role (Avg)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Indicators Activity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents By Close Reason",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents Top Close Analysts",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Memory Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents by Role",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Failed Playbooks runs",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Running playbooks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents Occurred Per Day",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "CPU Usage % per Engine",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Playbook run errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Errors by Incident Type per Command (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Memory Usage % per Engine (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Most Active Integrations",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Playbook runs",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Late Tasks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Busy Workers Count per Engine",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Mean Time to Detection",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active vs Expired Indicators",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Top 10 Attack Pattern Indicators in Related Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "SLA by Incident Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Mean Time to Triage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command executions per Integration Category",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incident Types by Severity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Indicators by Verdict",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Incidents by Role",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents Dropped in Preprocessing",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTT by Severity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTC by Severity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Elastic CPU Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Detection SLA by Status",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTR Occurred by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Incidents - Pie chart",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Late Tasks by User",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Task executions",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command execution errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "CPU Usage % per Engine (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTR by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Incidents in Error Run Status",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Top 10 File Indicators in Related Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Top Active Playbooks",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Important Messages",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Disk Usage % per Engine (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Mean Time to Resolution (Occurred)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "My Messages",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command execution errors per Integration Category",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Manual Verdict Indicators by User",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Within SLA by Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Incidents - Line chart",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Elastic Disk Current Usage",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Late Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Relationship Generating Integrations",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Page Break Widget",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command average runtime per Instance (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Mentions",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Busy Workers per Engine (last 24h)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Text Widget",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Task execution errors",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Active Indicators Volumes by Feed",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Most Active Users",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Average runtime by Incident Type per Playbook (top 5)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command execution type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Manual Verdict Indicators",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Unassigned Pending Incidents",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Malicious Indicators Activity",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "TopMaliciousRatioIndicators",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "MTTR by Type (in minutes)",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Command executions per Incident Type",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			},
+			{
+				"name": "Closed By Dbot",
+				"supportedModules": [
+					"C1",
+					"C3",
+					"X0",
+					"X1",
+					"X3",
+					"X5",
+					"ENT_PLUS"
+				]
+			}
+		],
+		"wizard": null
+	},
+	"created": "2020-06-30T20:23:29Z",
+	"currentVersion": "1.2.56",
+	"defaultDataSource": {
+		"id": "",
+		"name": ""
+	},
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.40.0",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.19.81",
+			"name": "Common Scripts"
+		}
+	},
+	"deprecated": false,
+	"description": "Frequently used widgets pack.",
+	"downloads": 43941,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"firstCreated": "0001-01-01T00:00:00Z",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"hybrid": false,
+	"id": "CommonWidgets",
+	"installMessage": "",
+	"integrations": [],
+	"isOverridable": false,
+	"itemVersion": "1.2.56",
+	"keywords": [],
+	"legacy": true,
+	"modules": [],
+	"name": "Common Widgets",
+	"packID": "CommonWidgets",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Core"
+	],
+	"toServerVersion": "",
+	"updated": "2025-07-08T10:38:06Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "4096037",
+	"videos": []
+}
