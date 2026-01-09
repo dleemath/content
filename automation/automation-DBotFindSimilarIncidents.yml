@@ -105,7 +105,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 5.0.0
     isoverridable: false
-    itemVersion: 1.41.30
+    itemVersion: 1.41.53
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -113,7 +113,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/sklearn:1.0.0.3150306
+dockerimage: demisto/sklearn:1.0.0.5898415
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -143,8 +143,8 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DBotFindSimilarIncidents', 'start', __line__())
-  CONSTANT_PACK_VERSION = '1.41.30'
-  demisto.debug('pack id = Base, pack version = 1.41.30')
+  CONSTANT_PACK_VERSION = '1.41.53'
+  demisto.debug('pack id = Base, pack version = 1.41.53')
   import json
   import re
   import warnings
