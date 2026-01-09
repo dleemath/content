@@ -29,7 +29,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 6.2.0
     isoverridable: false
-    itemVersion: 1.41.30
+    itemVersion: 1.41.53
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -37,7 +37,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.12.8.3296088
+dockerimage: demisto/python3:3.12.12.5490952
 engineinfo: {}
 mainengineinfo: {}
 name: DBotShowClusteringModelInfo
@@ -49,8 +49,8 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DBotShowClusteringModelInfo', 'start', __line__())
-  CONSTANT_PACK_VERSION = '1.41.30'
-  demisto.debug('pack id = Base, pack version = 1.41.30')
+  CONSTANT_PACK_VERSION = '1.41.53'
+  demisto.debug('pack id = Base, pack version = 1.41.53')
 
 
   # CONSTS
@@ -94,7 +94,7 @@ script: |
               incidents_in_cluster = json.loads(row["incidents"])
               incidents += incidents_in_cluster
               for inc in incidents_in_cluster:
-                  id_to_cluster[inc["id"]] = re.sub("\D", "", row["pivot"])
+                  id_to_cluster[inc["id"]] = re.sub(r"\D", "", row["pivot"])
                   id_to_cluster_name[inc["id"]] = row.get("name")
 
       incidents_to_show = []
