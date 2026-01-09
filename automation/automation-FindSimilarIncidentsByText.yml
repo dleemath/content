@@ -57,7 +57,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: 5.0.0
     isoverridable: false
-    itemVersion: 1.41.30
+    itemVersion: 1.41.53
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -89,8 +89,8 @@ runas: DBotWeakRole
 runonce: true
 script: |
   register_module_line('FindSimilarIncidentsByText', 'start', __line__())
-  CONSTANT_PACK_VERSION = '1.41.30'
-  demisto.debug('pack id = Base, pack version = 1.41.30')
+  CONSTANT_PACK_VERSION = '1.41.53'
+  demisto.debug('pack id = Base, pack version = 1.41.53')
   import dateutil.parser
   from sklearn.feature_extraction.text import TfidfVectorizer
   from sklearn.metrics.pairwise import linear_kernel
