@@ -1,0 +1,257 @@
+category: Forensics & Malware Analysis
+commonfields:
+  id: WildFire-Reports
+  version: -1
+configuration:
+- defaultvalue: https://wildfire.paloaltonetworks.com/publicapi
+  display: Server base URL (e.g., https://192.168.0.1/publicapi)
+  name: server
+  required: true
+  type: 0
+- display: ""
+  displaypassword: API Key
+  hiddenusername: true
+  name: credentials
+  required: false
+  section: Connect
+  type: 9
+- display: API Key
+  hidden: true
+  name: token
+  required: false
+  section: Connect
+  type: 4
+- advanced: true
+  display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  section: Connect
+  type: 8
+- advanced: true
+  display: Use system proxy settings
+  name: proxy
+  required: false
+  section: Connect
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.5.0
+    isoverridable: false
+    itemVersion: 2.1.63
+    packID: Palo_Alto_Networks_WildFire
+    packName: WildFire by Palo Alto Networks
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Generates a Palo Alto Networks WildFire PDF report. For internal use
+  with the TIM Sample Analysis feature.
+detaileddescription: "This integration is set up by default on Cortex XSOAR with the
+  Threat Intel Module (TIM). It is designed for internal use with the TIM Sample Analysis
+  feature. To run ad hoc CLI commands to generate WildFire reports, use the Palo Alto
+  Networks WildFire v2 integration instead.\n\n#### How to retrieve a Palo Alto Networks
+  WildFire Reports API key\n\nNote: If you have a TIM license that is up-to-date,
+  you do not need to set up an API key.\nThe required information is automatically
+  retrieved from your Cortex XSOAR TIM license. \nThis API key is used in the *API
+  Key* field in the integration configuration.\n\n1. Navigate to your [WildFire Account](https://wildfire.paloaltonetworks.com/wildfire/account).\n2.
+  Log in to your *WildFire* account.\n3. Select the *Account* tab from the menu.\n4.
+  Copy the API key.\n\n\n---\n[View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/wild-fire-reports)"
+display: Palo Alto Networks WildFire Reports
+image: content/packs/Palo_Alto_Networks_WildFire/WildFire-Reports_image.png
+name: WildFire-Reports
+script:
+  commands:
+  - arguments:
+    - description: SHA256 hash to check
+      name: sha256
+      required: true
+    description: Retrieves results for a file hash using WildFire.
+    name: internal-wildfire-get-report
+  dockerimage: demisto/python3:3.12.8.3296088
+  nativeimage:
+  - "8.8"
+  - "8.6"
+  runonce: false
+  script: |
+    register_module_line('WildFire-Reports', 'start', __line__())
+    CONSTANT_PACK_VERSION = '2.1.63'
+    demisto.debug('pack id = Palo_Alto_Networks_WildFire, pack version = 2.1.63')
+    import urllib3
+
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+    """ CLIENT CLASS """
+
+
+    class Client(BaseClient):
+        def __init__(
+            self, base_url: str, verify: bool = True, proxy: bool = False, ok_codes=(), headers: dict = None, token: str = None
+        ):
+            super().__init__(base_url, verify, proxy, ok_codes, headers)
+            self.token = token
+            self.agent = self.get_agent()  # Agent is different based on the platform running the integration (XSOAR/XSIAM)
+            add_sensitive_log_strs(token)
+
+        @staticmethod
+        def get_agent():
+            """
+            Auto API expect the agent header to be 'xdr' when running from within XSIAM and 'xsoartim' when running from
+            within XSOAR (both on-prem and cloud).
+            """
+            platform = get_demisto_version().get("platform")  # Platform = xsoar_hosted / xsoar / x2 depends on the machine
+            return "xdr" if platform == "x2" else "xsoartim"
+
+        def get_file_report(self, file_hash: str):
+            return self._http_request(
+                "POST",
+                url_suffix="/get/report",
+                params={
+                    "apikey": self.token,
+                    "agent": self.agent,
+                    "format": "pdf",
+                    "hash": file_hash,
+                },
+                resp_type="response",
+                ok_codes=(200, 401, 404),
+            )
+
+
+    """ COMMAND FUNCTIONS """
+
+
+    def test_module(client: Client) -> str:  # pragma: no coverage
+        try:
+            wildfire_hash_example = "dca86121cc7427e375fd24fe5871d727"  # guardrails-disable-line
+            res = client.get_file_report(wildfire_hash_example)
+            if res.status_code == 401:
+                return "Authorization Error: make sure API Key is correctly set"
+        except DemistoException as e:
+            if "Forbidden" in str(e):
+                return "Authorization Error: make sure API Key is correctly set"
+            else:
+                raise e
+        return "ok"
+
+
+    def wildfire_get_report_command(client: Client, args: Dict[str, str]):
+        """
+        Args:
+            client: the Client object
+            args: the command arguments from demisto.args(), file hash (sha256) to query on
+        """
+        sha256 = str(args.get("sha256"))
+        if not sha256Regex.match(sha256):
+            raise Exception("Invalid hash. Only SHA256 are supported.")
+
+        res = client.get_file_report(sha256)
+
+        if res.status_code == 200:
+            return_results({"status": "success", "data": base64.b64encode(res.content).decode()})
+
+        elif res.status_code == 401:
+            return_results(
+                {
+                    "status": "error",
+                    "error": {
+                        "title": "Couldn't fetch the Wildfire report.",
+                        "description": "Invalid apikey or expired apikey",
+                        "techInfo": str(res.content),
+                    },
+                }
+            )
+
+        elif res.status_code == 404:
+            return_results({"status": "not found"})
+
+
+    """ MAIN FUNCTION """
+
+
+    def main():  # pragma: no coverage
+        command = demisto.command()
+        params = demisto.params()
+        args = demisto.args()
+
+        base_url = params.get("server")
+        if base_url and base_url[-1] == "/":
+            base_url = base_url[:-1]
+        if base_url and not base_url.endswith("/publicapi"):
+            base_url += "/publicapi"
+        token = params.get("credentials", {}).get("password") or params.get("token")
+        if not token:
+            token = demisto.getLicenseCustomField("WildFire-Reports.token")
+        if not token:
+            # If token is empty when test-module is running, return a more readable output to the user.
+            if command == "test-module":
+                return_error(
+                    "Authorization Error: It's seems that the token is empty and you have not a TIM license "
+                    "that is up-to-date, Please fill the token or update your TIM license and try again."
+                )
+            else:
+                return_results(
+                    {
+                        "status": "error",
+                        "error": {
+                            "title": "Couldn't fetch the Wildfire report.",
+                            "description": "The token can't be empty.",
+                            "techInfo": "The token can't be empty, Please fill the token in the instance configuration "
+                            "or update your TIM license.",
+                        },
+                    }
+                )
+                sys.exit()
+        verify_certificate = not params.get("insecure", False)
+        proxy = params.get("proxy", False)
+
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+        demisto.debug(f"Command being called is {command}")
+
+        try:
+            client = Client(
+                base_url=base_url,
+                token=token,
+                headers=headers,
+                verify=verify_certificate,
+                proxy=proxy,
+            )
+
+            if command == "test-module":
+                result = test_module(client)
+                return_results(result)
+
+            elif command == "internal-wildfire-get-report":
+                wildfire_get_report_command(client, args)
+
+        # Log exceptions and return errors
+        except Exception as e:
+            # Its not an error because it's not return to the warroom
+            return_results(
+                {
+                    "status": "error",
+                    "error": {
+                        "title": "Couldn't fetch the Wildfire report.",
+                        "description": f"Failed to download report.\nError:\n{e!s}",
+                        "techInfo": f"Failed to execute command {demisto.command()}.\nError:\n{e!s}\n"
+                        f"Trace back:\n{traceback.format_exc()}",
+                    },
+                }
+            )
+
+
+    """ ENTRY POINT """
+
+    if __name__ in ("__main__", "__builtin__", "builtins"):
+        main()
+
+    register_module_line('WildFire-Reports', 'end', __line__())
+  subtype: python3
+  type: python
+sectionorder:
+- Connect
+- Collect
+system: true
