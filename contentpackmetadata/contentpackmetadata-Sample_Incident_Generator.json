@@ -1,0 +1,112 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"casefield": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Analytics \u0026 SIEM",
+				"commands": [],
+				"description": "Generate random incidents per given parameter.",
+				"fromversion": "5.0.0",
+				"id": "Sample Incident Generator",
+				"name": "Sample Incident Generator",
+				"toversion": ""
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"created": "2020-11-09T18:45:08Z",
+	"currentVersion": "1.0.2",
+	"defaultDataSource": {
+		"id": "",
+		"name": ""
+	},
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.41.53",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "Generate random incidents per given parameter",
+	"downloads": 3135,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"firstCreated": "2020-11-09T18:45:08Z",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"hybrid": false,
+	"id": "sampleSiem",
+	"installMessage": "",
+	"integrations": [
+		{
+			"id": "Sample Incident Generator",
+			"imagePath": "content/packs/sampleSiem/SampleIncidentGenerator_image.png",
+			"name": "Sample Incident Generator"
+		}
+	],
+	"isOverridable": false,
+	"itemVersion": "1.0.2",
+	"keywords": [],
+	"legacy": true,
+	"modules": [],
+	"name": "Sample Incident Generator",
+	"packID": "sampleSiem",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2026-01-07T18:04:58Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6597147",
+	"videos": []
+}
